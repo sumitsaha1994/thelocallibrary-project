@@ -1,0 +1,45 @@
+<h1>{{book.title}}</h1>
+<p>
+    <strong>Author:</strong>
+    <a href={{book.author.url}}>{{book.author.name}}</a>
+</p>
+<p><strong>Summary: </strong>{{book.summary}}</p>
+<p><strong>ISBN: </strong>{{book.isbn}}</p>
+<p>
+    <strong>Genre: </strong>&nbsp;
+    {{#if book.genre.length}}
+    {{#each book.genre}}
+    <a href={{url}}>{{name}}</a>
+    {{#if @last}}
+    {{else}}
+    ,
+    {{/if}}
+    {{/each}}
+    {{/if}}
+</p>
+<div style='margin-left:20px;margin-top:20px'>
+    <h4>Copies</h4>
+    {{#if bookInstances.length}}
+    {{#each bookInstances}}
+    <hr>
+    {{#if (isEqual status "Available")}}
+    <p class="text-success">{{status}}</p>
+    {{else if (isEqual status "Maintenance")}}
+    <p class="text-danger">{{status}}</p>
+    {{else}}
+    <p class="text-warning">{{status}}</p>
+    {{/if}}
+    <p><strong>Imprint: </strong>imprint</p>
+    {{#if (isNotEqual status "Available")}}
+    <p><strong>Due back: </strong>{{due_back}}</p>
+    {{/if}}
+    <p>
+        <strong>Id: </strong>
+        <a href={{url}}>{{_id}}</a>
+    </p>
+    {{/each}}
+    {{/if}}
+</div>
+
+<p><a href="{{book.url}}/delete">Delete Book</a></p>
+<p><a href="{{book.url}}/update">Update Book</a></p>

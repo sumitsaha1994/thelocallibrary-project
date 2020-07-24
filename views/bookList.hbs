@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+{{#if books.length}}
+<ul>
+    {{#each books}}
+    <li>
+        <a href="{{this.url}}">
+            <strong>{{this.title}}</strong>
+        </a> ({{this.author.name}})
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<p>There are no books</p>
+{{/if}}

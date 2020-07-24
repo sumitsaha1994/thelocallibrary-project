@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+{{#if authors.length}}
+<ul>
+    {{#each authors}}
+    <li>
+        <a href="{{url}}">{{name}}</a> ({{lifespan}})
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+There are no authors.
+{{/if}}

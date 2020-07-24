@@ -1,0 +1,60 @@
+<h1>{{title}}</h1>
+<form action="" method="POST">
+    <div class="form-group">
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="Name of book"
+            value="{{#if (isEqual book undefined)}}{{else}}{{book.title}}{{/if}}">
+    </div>
+    <div class="form-group">
+        <label for="author">Author: </label>
+        <select name="author" id="author" class="form-control">
+
+            {{#each authors}}
+            {{#if (isNotEqual ../book undefined)}}
+            {{#if (isNotEqual ../book.author._id undefined)}}
+            <option value={{_id}} {{#if (isEqual ../book.author._id this._id) }}selected{{/if}}>
+                {{name}}
+            </option>
+            {{else}}
+            <option value={{_id}} {{#if (isEqual ../book.author this._id) }}selected{{/if}}>
+                {{name}}
+            </option>
+            {{/if}}
+            {{else}}
+            <option value={{_id}}>{{name}}</option>
+            {{/if}}
+            {{/each}}
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="summary">Summary: </label>
+        <textarea type="textarea" name="summary" class="form-control" id="summary" placeholder="Summary"
+            rows="3">{{#if (isEqual book undefined)}}{{else}}{{book.summary}}{{/if}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="isbn">ISBN: </label>
+        <input type="text" name="isbn" class="form-control" id="isbn" placeholder="ISBN"
+            value="{{#if (isEqual book undefined)}}{{else}}{{book.isbn}}{{/if}}">
+    </div>
+    <div class="form-group">
+        <label for="genre">Genre: </label>
+        <div>
+            {{#each genres}}
+            <div style='display: inline; padding-right:10px;'>
+                <input type="checkbox" name="genre" id="{{_id}}" value="{{_id}}"
+                    {{#if (isEqual checked 'true')}}checked{{/if}}>
+                <label for="{{_id}}">{{name}}</label>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{{#if errors.length}}
+<ul>
+    {{#each errors}}
+    <li class="text-danger">{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}

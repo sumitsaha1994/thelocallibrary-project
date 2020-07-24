@@ -1,0 +1,54 @@
+<h1>{{title}}</h1>
+<form action="" method="POST">
+    <div class="form-group">
+        <label for="book">Book: </label>
+        <select name="book" id="book" class="form-control" aria-placeholder="Select Book">
+
+            {{#each bookList}}
+            {{#if (isNotEqual ../bookinstance undefined)}}
+            {{#if (isNotEqual ../bookinstance.book._id undefined)}}
+            <option value={{_id}} {{#if (isEqual ../bookinstance.book._id this._id) }}selected{{/if}}>
+                {{title}}
+            </option>
+            {{else}}
+            <option value={{_id}} {{#if (isEqual ../bookinstance.book this._id) }}selected{{/if}}>
+                {{title}}
+            </option>
+            {{/if}}
+            {{else}}
+            <option value={{_id}}>{{title}}</option>
+            {{/if}}
+            {{/each}}
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="imprint">Imprint: </label>
+        <input type="text" name="imprint" class="form-control" id="imprint" placeholder="Imprint"
+            value={{#if (isEqual bookinstance undefined)}}{{else}}{{bookinstance.imprint}}{{/if}}>
+    </div>
+    <div class="form-group">
+        <label for="due_back">Date when book available: </label>
+        <input type="date" name="due_back" class="form-control" id="due_back"
+            value={{#if (isEqual bookinstance undefined)}}{{else}}{{bookinstance.due_back}}{{/if}}>
+    </div>
+    <div class="form-group">
+        <label for="status">Status: </label>
+        <select name="status" id="status" class="form-control" aria-placeholder="Select status">
+            <option value="Maintenance">Maintenance</option>
+            <option value="Available">Available</option>
+            <option value="Loaned">Loaned</option>
+            <option value="Reserved">Reserved</option>
+        </select>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+{{#if errors.length}}
+<ul>
+    {{#each errors}}
+    <li class="text-danger">{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}

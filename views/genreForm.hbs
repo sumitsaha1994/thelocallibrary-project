@@ -1,0 +1,16 @@
+<h1>{{title}}</h1>
+<form method="POST" action="">
+    <div class="form-group">
+        <label for="name">Genre: </label>
+        <input class="form-control" type="text" id="name" name="name" placeholder="Fantasy, Poetry etc."
+            value="{{#if (isEqual genre undefined)}}{{else}}{{genre.name}}{{/if}}" required />
+    </div>
+    <button class=" btn btn-primary" type="submit">Submit</button>
+</form>
+{{#if errors.length}}
+<ul>
+    {{#each errors}}
+    <li>{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}

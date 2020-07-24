@@ -1,0 +1,22 @@
+<h1>{{title}}</h1>
+{{#if list.length}}
+<ul>
+    {{#each list}}
+    <li>
+        <a href={{url}}> {{this.book.title}} : {{this.imprint}}</a> -
+        {{#if (isEqual this.status 'Available') }}
+        <span class="text-success">{{this.status}}</span>
+        {{else }}
+        {{#if (isEqual this.status 'Maintenance') }}
+        <span class="text-danger">{{this.status}}</span>
+        {{else}}
+        <span class="text-warning">{{this.status}}</span>
+        {{/if}}
+        <span>(Due: {{this.due_back}})</span>
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+There are no book copies in this library.
+{{/if}}
